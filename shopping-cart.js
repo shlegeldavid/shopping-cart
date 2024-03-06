@@ -63,14 +63,13 @@ while (true) {
   else if (key === 'x') { if (value < MAX) { value++; } }
   else { break; }
 }
-console.log('\nA value the user requested: ' + value);
 
-if (index === 1) {
+if (index === 0) {
     shoppingCart.addItem('ultrapen', 21.99, value);
-} else if (index === 2) {
+} else if (index === 1) {
     shoppingCart.addItem('playstation 5', 44.99, value);
-} else if (index === 3) {
+} else if (index === 2) {
     shoppingCart.addItem('amogus', 18.87, value);
 };
 
-console.log(shoppingCart);
+console.log('С вас ' + shoppingCart.total + '$');
