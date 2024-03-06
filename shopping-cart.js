@@ -1,3 +1,5 @@
+const readlineSync = require('readline-sync');
+
 const shoppingCart = {
     items: [], // Массив товаров
     total: 0,  // Общая стоимость товаров
@@ -42,6 +44,33 @@ const shoppingCart = {
     // Пока скидку не реализовал
   };
 
-shoppingCart.addItem('asas', 1, 3);
-shoppingCart.applyDiscount('DISCOUNT10');
-console.log(shoppingCart.total);
+// Попробую тут прикрутить readline sync
+// Написано криво, но вроде работает, что не может не радовать
+itemsInShop = ['ultrapen - 21.99$', 'playstation 5 - 44.99$', 'amogus - 18.87$'];
+index = readlineSync.keyInSelect(itemsInShop, 'Which item you want to add?');
+
+let key = 0;
+MAX = 60, MIN = 0, value = 30, key;
+console.log('\n\n' + (new Array(20)).join(' ') +
+  '[Z] <- -> [X]  FIX: [SPACE]\n');
+while (true) {
+  console.log('\x1B[1A\x1B[K|' +
+    (new Array(value + 1)).join('-') + 'O' +
+    (new Array(MAX - value + 1)).join('-') + '| ' + value);
+  key = readlineSync.keyIn('',
+    {hideEchoBack: true, mask: '', limit: 'zx '});
+  if (key === 'z') { if (value > MIN) { value--; } }
+  else if (key === 'x') { if (value < MAX) { value++; } }
+  else { break; }
+}
+console.log('\nA value the user requested: ' + value);
+
+if (index === 1) {
+    shoppingCart.addItem('ultrapen', 21.99, value);
+} else if (index === 2) {
+    shoppingCart.addItem('playstation 5', 44.99, value);
+} else if (index === 3) {
+    shoppingCart.addItem('amogus', 18.87, value);
+};
+
+console.log(shoppingCart);
